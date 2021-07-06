@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'AllHitTestStack.dart';
 
 class DualScreenScrollWidget extends StatefulWidget {
   /// 左半栏内容区域
@@ -25,6 +26,7 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
   ScrollController _scrollControllerLeft = ScrollController();
   ScrollController _scrollControllerRight = ScrollController();
   double _scrollControllerRightOldOffset = 0;
+  bool _showActionBar = false;
 
   @override
   void initState() {
@@ -37,10 +39,20 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
           if (_scrollControllerLeft.position.minScrollExtent < _scrollControllerLeft.position.pixels) {
             _scrollControllerLeft.jumpTo(_scrollControllerLeft.offset - (_scrollControllerRightOldOffset - _scrollControllerRight.offset));
           }
+          if (_showActionBar != true) {
+            setState(() {
+              _showActionBar = true;
+            });
+          }
         } else if (_scrollControllerRightOldOffset < _scrollControllerRight.offset) {
           if (_scrollControllerLeft.position.maxScrollExtent > _scrollControllerLeft.position.pixels) {
             var newOffset = _scrollControllerLeft.offset + (_scrollControllerRight.offset - _scrollControllerRightOldOffset);
             _scrollControllerLeft.jumpTo(newOffset);
+          }
+          if (_showActionBar != false) {
+            setState(() {
+              _showActionBar = false;
+            });
           }
         }
         _scrollControllerRightOldOffset = _scrollControllerRight.offset;
@@ -54,7 +66,7 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
     double screenWidthHalf = MediaQuery.of(context).size.width / 2.0;
 
     return Scaffold(
-      body: Stack(
+      body: AllHitTestStack(
         children: [
           Positioned(
             width: screenWidthHalf,
@@ -147,47 +159,50 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
             left: 0,
             right: 0,
             top: 0,
-            child: AppBar(
-              backgroundColor: Color(0xddffffff),
-              leading: Center(
-                child: Text(
-                  "宗 保",
-                  style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.black),
+            child: Offstage(
+              offstage: !_showActionBar,
+              child: AppBar(
+                backgroundColor: Color(0xddffffff),
+                leading: Center(
+                  child: Text(
+                    "宗 保",
+                    style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.black),
+                  ),
                 ),
-              ),
-              actions: [
-                Tab(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18),
-                    child: OutlinedButton(
-                      child: Text('主页', style: TextStyle(color: Colors.black54)),
-                      onPressed: () {
-                        print("点击：position");
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                          "点击：position",
-                          style: TextStyle(color: Colors.white),
-                        )));
-                      },
+                actions: [
+                  Tab(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 18),
+                      child: OutlinedButton(
+                        child: Text('主页', style: TextStyle(color: Colors.black54)),
+                        onPressed: () {
+                          print("点击：position");
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                            "点击：position",
+                            style: TextStyle(color: Colors.white),
+                          )));
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Tab(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18),
-                    child: Text('时光轴'),
+                  Tab(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 18),
+                      child: Text('时光轴'),
+                    ),
                   ),
-                ),
-                Tab(
-                  child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('博客')),
-                ),
-                Tab(
-                  child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('分类')),
-                ),
-                Tab(
-                  child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('简介')),
-                ),
-              ],
+                  Tab(
+                    child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('博客')),
+                  ),
+                  Tab(
+                    child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('分类')),
+                  ),
+                  Tab(
+                    child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('简介')),
+                  ),
+                ],
+              ),
             ),
           )
         ],

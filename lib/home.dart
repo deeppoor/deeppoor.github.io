@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:life_website/widget/dual_screen_scroll_widget.dart';
 
 class MyHomePage extends StatelessWidget {
+  var _title = ["主页", "时光轴", "博客", "分类", "简介"];
+
   @override
   Widget build(BuildContext context) {
     return DualScreenScrollWidget(
@@ -46,8 +48,7 @@ class MyHomePage extends StatelessWidget {
                     margin: EdgeInsets.only(top: 66.0),
                     child: TabBar(
                       onTap: (position) {
-                        print("点击：$position");
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：$position")));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：${_title[position]}")));
                       },
                       automaticIndicatorColorAdjustment: false,
                       indicatorColor: Colors.black,
@@ -58,57 +59,15 @@ class MyHomePage extends StatelessWidget {
                       unselectedLabelColor: Colors.black54,
                       labelPadding: EdgeInsets.symmetric(horizontal: 25.0),
                       tabs: [
-                        Tab(
-                          child: Listener(
-                            child: Text('主\n页'),
-                            onPointerDown: (event) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：主页")));
-                            },
-                          ),
-                        ),
-                        Tab(
-                          child: GestureDetector(
-                            child: Text('时\n光\n轴'),
-                            onTap: () {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：时光轴")));
-                            },
-                          ),
-                        ),
-                        Listener(
-                          child: Tab(
-                            child: Text('博\n客'),
-                          ),
-                          onPointerDown: (event) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：主页")));
-                          },
-                        ),
-                        RawGestureDetector(
-                          child: Tab(
-                            child: Text('分\n类'),
-                          ),
-                          gestures: {
-                            TapMultipleGestureRecognizer: GestureRecognizerFactoryWithHandlers<TapMultipleGestureRecognizer>(
-                                () => TapMultipleGestureRecognizer(), (TapMultipleGestureRecognizer instance) {
-                              instance.onTap = () {
-                                // 失败后宣告胜利的回调
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：分类")));
-                              };
-                              instance.onTapDown = (_) {};
-                              instance.onTapUp = (_) {};
-                            })
-                          },
-                        ),
-                        InkWell(
-                          child: Tab(
-                            child: Text('简\n介'),
-                          ),
-                          onTap: () {},
-                        ),
+                        ..._title
+                            .map((e) => Tab(
+                                  child: Text(e),
+                                ))
+                            .toList()
                       ],
                     ),
                   ),
                 ),
-                Text("")
               ],
             ))
           ],
