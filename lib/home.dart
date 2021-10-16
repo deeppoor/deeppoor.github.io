@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:life_website/notifier/HomeNotifier.dart';
+import 'package:life_website/page/blog_page.dart';
 import 'package:life_website/page/home_page.dart';
+import 'package:life_website/page/resume_page.dart';
 import 'package:life_website/widget/dual_screen_scroll_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -33,9 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
     if (tabTitles[0] == tabTitleName) {
       return [HomePage()];
     } else if (tabTitles[2] == tabTitleName) {
-      return [getTabView(tabTitleName, context)];
+      return [getTabView(tabTitleName, context), BlogPage()];
+    } else if (tabTitles[4] == tabTitleName) {
+      return [getTabView(tabTitleName, context), ResumePage()];
     }
-    return [HomePage()];
+    return [getTabView(tabTitleName, context)];
   }
 
   Widget getTabView(String name, BuildContext context) {
@@ -43,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Container(
         alignment: Alignment.center,
         height: MediaQuery.of(context).size.height / 2,
+        padding: EdgeInsets.only(top: 52.0),
         child: Text(
           "$name",
           style: Theme.of(context).textTheme.headline3,
