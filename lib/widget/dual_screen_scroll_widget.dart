@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:life_website/notifier/HomeNotifier.dart';
+import 'package:provider/provider.dart';
 import 'AllHitTestStack.dart';
 
 class DualScreenScrollWidget extends StatefulWidget {
@@ -64,6 +66,7 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidthHalf = MediaQuery.of(context).size.width / 2.0;
+    final homeTabNotifier = Provider.of<HomeTabNotifier>(context);
 
     return Scaffold(
       body: AllHitTestStack(
@@ -86,7 +89,7 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "清风徐来 水波不兴 / 雾撞星野 风遇山止",
+                          "雾失楼台 月迷津渡 / 雾撞星野 风遇山止",
                           style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.white54),
                         ),
                         Padding(
@@ -160,7 +163,7 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
             right: 0,
             top: 0,
             child: Offstage(
-              offstage: !_showActionBar,
+              offstage: ((tabTitles[0] == homeTabNotifier.tabName) || (!_showActionBar)),
               child: AppBar(
                 backgroundColor: Color(0xddffffff),
                 leading: Center(
@@ -169,39 +172,26 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
                     style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.black),
                   ),
                 ),
-                actions: [
-                  Tab(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 18),
-                      child: OutlinedButton(
-                        child: Text('主页', style: TextStyle(color: Colors.black54)),
-                        onPressed: () {
-                          print("点击：position");
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                            "点击：position",
-                            style: TextStyle(color: Colors.white),
-                          )));
-                        },
-                      ),
-                    ),
-                  ),
-                  Tab(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 18),
-                      child: Text('时光轴'),
-                    ),
-                  ),
-                  Tab(
-                    child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('博客')),
-                  ),
-                  Tab(
-                    child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('分类')),
-                  ),
-                  Tab(
-                    child: Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text('简介')),
-                  ),
-                ],
+                actions: tabTitles
+                    .map((e) => Tab(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 18),
+                            child: (homeTabNotifier.tabName.endsWith(e))
+                                ? OutlinedButton(
+                                    child: Text(e, style: TextStyle(color: Colors.black54)),
+                                    onPressed: () {
+                                      homeTabNotifier.changeTabName(e);
+                                    },
+                                  )
+                                : TextButton(
+                                    child: Text(e, style: TextStyle(color: Colors.black54)),
+                                    onPressed: () {
+                                      homeTabNotifier.changeTabName(e);
+                                    },
+                                  ),
+                          ),
+                        ))
+                    .toList(),
               ),
             ),
           )

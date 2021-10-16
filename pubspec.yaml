@@ -27,8 +27,9 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  linked_scroll_controller: ^0.2.0-nullsafety.0
+  cupertino_icons: ^1.0.3
+  flutter_markdown: ^0.6.2
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
     - asset/fonts/WenYue-GuDianMingChaoTi-JRFC.otf
     - asset/images/bg.jpg
     - asset/images/bg2.jpg
+    - assets/md/Compose_vs_Flutter.md
     # assets-generator-begin
     # asset/images/*
     # assets-generator-end
