@@ -22,17 +22,17 @@ samples, guidance on mobile development, and a full API reference.
 
 **Why**  
 Flutter HTML Renderer:HTML、Canvaskit
-'''
+```
 flutter run -d chrome --web-renderer html
  
 flutter run -d chrome --web-renderer canvaskit
-'''
+```
 
 **The solution**  
-change 
-'''flutter build web --release'''  
+change  
+```flutter build web --release```  
 to  
-'''flutter build web --release --web-renderer html'''
+```flutter build web --release --web-renderer html```
 
 ### 2. 404 Failed to load resource Deploying Flutter Web App to GitHub Pages
 
@@ -40,4 +40,4 @@ to
 
 **The solution**  
 
-There is <base href=''/> tag in your index.html. Change it to the base path of your github repo. In this case this would be <base href="/life_website/"/>. If you don't have it you can add it inside the <head> tag.
+There is ```<base href=''/>``` tag in your ```index.html```. Change it to the base path of your github repo. In this case this would be ```<base href="/life_website/"/>```. If you don't have it you can add it inside the ```<head>``` tag.
