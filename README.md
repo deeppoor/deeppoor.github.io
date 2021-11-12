@@ -18,7 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Bug Logs
 
-### When run 'Flutter web'，the page is blank
+### 1. When run 'Flutter web'，the page is blank
 
 **Why**  
 Flutter HTML Renderer:HTML、Canvaskit
@@ -34,7 +34,7 @@ change
 to  
 '''flutter build web --release --web-renderer html'''
 
-### 404 Failed to load resource Deploying Flutter Web App to GitHub Pages
+### 2. 404 Failed to load resource Deploying Flutter Web App to GitHub Pages
 
 [https://stackoverflow.com/questions/65689346/404-failed-to-load-resource-deploying-flutter-web-app-to-github-pages](https://stackoverflow.com/questions/65689346/404-failed-to-load-resource-deploying-flutter-web-app-to-github-pages)
 
