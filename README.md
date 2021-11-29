@@ -1,10 +1,10 @@
 # life_website
 
-通过 Flutter Web 搭建的网站，展示地址是 [ocnyang.github.io/life_website](http://ocnyang.com/life_website/#/)  
+通过 Flutter Web 搭建、并借助 GitHub 自动构建发布的网站，展示地址是 [life_website](http://ocnyang.com/life_website/#/)  
 第一次加载速度较慢，请耐心等待，长时间不显示，尝试点页面刷新。
 
 A Flutter Web project.  
-**Web Address：** [ocnyang.github.io/life_website](http://ocnyang.com/life_website/#/) 
+**Web Demo Address：** [ocnyang.github.io/life_website](http://ocnyang.com/life_website/#/) 
 
 > [Web UI kit Address](https://www.sanga-ryokan.com)
 
