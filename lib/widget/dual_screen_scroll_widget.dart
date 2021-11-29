@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:life_website/notifier/HomeNotifier.dart';
+import 'package:life_website/app/config.dart';
+import 'package:life_website/notifier/home_notifier.dart';
 import 'package:provider/provider.dart';
-import 'AllHitTestStack.dart';
+import 'all_hit_test_stack.dart';
 
 class DualScreenScrollWidget extends StatefulWidget {
   /// 左半栏内容区域
@@ -163,7 +164,7 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
             right: 0,
             top: 0,
             child: Offstage(
-              offstage: ((tabTitles[0] == homeTabNotifier.tabName) || (!_showActionBar)),
+              offstage: ((APP_NAVIGATION[0] == homeTabNotifier.tabName) || (!_showActionBar)),
               child: AppBar(
                 backgroundColor: Color(0xddffffff),
                 leading: Center(
@@ -172,7 +173,7 @@ class _DualScreenScrollWidgetState extends State<DualScreenScrollWidget> {
                     style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.black),
                   ),
                 ),
-                actions: tabTitles
+                actions: APP_NAVIGATION
                     .map((e) => Tab(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),

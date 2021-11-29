@@ -1,12 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:life_website/notifier/HomeNotifier.dart';
+import 'package:life_website/notifier/home_notifier.dart';
 import 'package:life_website/page/blog_page.dart';
 import 'package:life_website/page/home_page.dart';
 import 'package:life_website/page/resume_page.dart';
 import 'package:life_website/widget/dual_screen_scroll_widget.dart';
 import 'package:provider/provider.dart';
+
+import 'app/config.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -32,11 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // 主页 左半边
   List<Widget> getLeftScreenSlivers(String tabTitleName, BuildContext context) {
-    if (tabTitles[0] == tabTitleName) {
+    if (APP_NAVIGATION[0] == tabTitleName) {
       return [HomePage()];
-    } else if (tabTitles[2] == tabTitleName) {
+    } else if (APP_NAVIGATION[2] == tabTitleName) {
       return [getTabView(tabTitleName, context), BlogPage()];
-    } else if (tabTitles[4] == tabTitleName) {
+    } else if (APP_NAVIGATION[4] == tabTitleName) {
       return [getTabView(tabTitleName, context), ResumePage()];
     }
     return [getTabView(tabTitleName, context)];

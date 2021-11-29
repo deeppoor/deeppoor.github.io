@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_website/notifier/HomeNotifier.dart';
+import 'package:life_website/app/config.dart';
+import 'package:life_website/notifier/home_notifier.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     DefaultTabController(
-                      length: tabTitles.length,
+                      length: APP_NAVIGATION.length,
                       initialIndex: 0,
                       child: Container(
                         width: double.infinity,
@@ -41,13 +42,13 @@ class _HomePageState extends State<HomePage> {
                         margin: EdgeInsets.only(top: 66.0),
                         child: TabBar(
                           onTap: (position) {
-                            homeTabNotifier.changeTabName(tabTitles[position]);
+                            homeTabNotifier.changeTabName(APP_NAVIGATION[position]);
                             // if (2 == position) {
                             //   Navigator.push(context, MaterialPageRoute(builder: (_) {
                             //     return BlogPage();
                             //   }));
                             // } else
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：${tabTitles[position]}")));
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("点击：${APP_NAVIGATION[position]}")));
                           },
                           automaticIndicatorColorAdjustment: false,
                           indicatorColor: Colors.black,
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                           unselectedLabelColor: Colors.black54,
                           labelPadding: EdgeInsets.symmetric(horizontal: 25.0),
                           tabs: [
-                            ...tabTitles
+                            ...APP_NAVIGATION
                                 .map((e) => Tab(
                               child: Text(e),
                             ))
