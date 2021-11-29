@@ -1,20 +1,13 @@
 # life_website
 
-A new Flutter project.  
-[Web UI kit](https://www.sanga-ryokan.com)
+通过 Flutter Web 搭建的网站，展示地址是 [ocnyang.github.io/life_website](http://ocnyang.com/life_website/#/)  
+第一次加载速度较慢，请耐心等待，长时间不显示，尝试点页面刷新。
 
-## Getting Started
+A Flutter Web project.  
+**Web Address：** [ocnyang.github.io/life_website](http://ocnyang.com/life_website/#/) 
 
-This project is a starting point for a Flutter application.
+> [Web UI kit Address](https://www.sanga-ryokan.com)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
 ## Bug Logs
 
