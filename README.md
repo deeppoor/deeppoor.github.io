@@ -33,7 +33,10 @@ to
 
 **The solution**  
 
-There is ```<base href=''/>``` tag in your ```index.html```. Change it to the base path of your github repo. In this case this would be ```<base href="/life_website/"/>```. If you don't have it you can add it inside the ```<head>``` tag.
+There is ```<base href=''/>``` tag in your ```index.html```. Change it to the base path of your github repo. In this case this would be ```<base href="/repo_name/"/>```. If you don't have it you can add it inside the ```<head>``` tag.
+
+> or 
+> flutter build web --release --base-href="/repo_name/"
 
 ### 3. Loading View
 
