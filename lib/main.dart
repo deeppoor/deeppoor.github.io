@@ -1,4 +1,7 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,81 +33,114 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _snackBarVisible = false;
+
+  void _handleTap(bool show) {
+    setState(() {
+      _snackBarVisible = show;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        color: Colors.white,
-        child: Card.filled(
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(9.0))),
-          color: Colors.black,
-          elevation: 3,
-          child: IntrinsicWidth(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, left: 18.0, right: 18.0),
-                  child: Theme(
-                    data: ThemeData(fontFamily: 'Chappa'),
-                    child: const Text(
-                      'deeppoor',
-                      style: TextStyle(color: Colors.white, fontFamily: 'Chappa', fontSize: 24.0),
+      body: Stack(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            color: const Color.fromARGB(255, 254, 252, 253),
+            child: Container(
+              padding: const EdgeInsets.only(top: 38.0, left: 18.0, right: 18.0, bottom: 28.0),
+              foregroundDecoration: BoxDecoration(
+                border: Border.all(color: const Color.fromARGB(255, 245, 219, 229), width: 2),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 135,
+                    height: 135,
+                    child: Lottie.asset('lottie/girl.json'),
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  SizedBox(
+                    height: 18,
+                    child: Lottie.asset("lottie/bee.json"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: .0, left: 18.0, right: 18.0),
+                    child: Tooltip(
+                      message: "穷奇",
+                      decoration: const BoxDecoration(color: Colors.transparent),
+                      verticalOffset: 14,
+                      textStyle: const TextStyle(color: Color.fromARGB(255, 255, 185, 205), fontFamily: 'ZHFont'),
+                      child: Theme(
+                        data: ThemeData(fontFamily: 'LogoFont'),
+                        child: const Text(
+                          'deeppoor',
+                          style: TextStyle(color: Color.fromARGB(255, 255, 185, 205), fontFamily: 'LogoFont', fontSize: 24.0),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                const Divider(height: .0, color: Colors.white),
-                IntrinsicHeight(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.emoji_transportation,
-                            color: Colors.white,
-                            size: 18.0,
-                          ),
-                        ),
-                      ),
-                      const VerticalDivider(color: Colors.white, width: 0.0),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.savings,
-                            color: Colors.white,
-                            size: 18.0,
-                          ),
-                        ),
-                      ),
-                      const VerticalDivider(color: Colors.white, width: 0.0),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.face_3,
-                            color: Colors.white,
-                            size: 18.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                ],
+              ),
             ),
           ),
-        ),
+          Positioned(
+            bottom: _snackBarVisible ? 52.0 : 0.0,
+            left: 0,
+            right: 0,
+            child: InkWell(
+              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Tooltip(
+                  message: "如果你为富裕而烦恼，为什么不捐赠给我呢？下面是我的卡号",
+                  child: footText("If you are troubled by being too rich, why not donate to me? My bank card: "),
+                ),
+                SvgPicture.asset(
+                  "assets/icons/unionpay.svg",
+                  // colorFilter: const ColorFilter.mode(Color.fromARGB(255, 255, 185, 205), BlendMode.srcIn),
+                  semanticsLabel: 'UnionPay',
+                  width: 12,
+                  height: 12,
+                ),
+                footText(" 6214"),
+                footText(" 8358"),
+                footText(" 9272"),
+                footText(" 5795"),
+              ]),
+              onTap: () {
+                copyBankCardNumber(context, _handleTap);
+              },
+              onDoubleTap: () {
+                copyBankCardNumber(context, _handleTap);
+              },
+              onSecondaryTap: () {
+                copyBankCardNumber(context, _handleTap);
+              },
+              onLongPress: () {
+                copyBankCardNumber(context, _handleTap);
+              },
+            ),
+          )
+        ],
       ),
     );
   }
+}
+
+Text footText(String text) {
+  return Text(text, style: const TextStyle(color: Color.fromARGB(255, 255, 185, 205), fontFamily: 'ZHFont', fontSize: 12));
+}
+
+void copyBankCardNumber(BuildContext context, void Function(bool show) handleTap) {
+  handleTap(true);
+  FlutterClipboard.copy("6214 8358 9272 5795").then((value) => {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Card number copied successfully / 复制卡号成功"))).closed.then((value) => {handleTap(false)})
+      });
 }
