@@ -37,8 +37,8 @@ jobs:
       - run: flutter pub cache repair
       - run: flutter config --enable-web
       - run: flutter pub get
-#      - run: flutter build web --release --web-renderer html --base-href="/deeppoor.github.io/"
-      - run: flutter build web --release --web-renderer canvaskit --base-href="/deeppoor.github.io/"
+      - run: flutter build web --release --web-renderer html --base-href="/deeppoor.github.io/"
+#      - run: flutter build web --release --web-renderer canvaskit --base-href="/deeppoor.github.io/"
       - run: |
           cd build/web
           git init
