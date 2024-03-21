@@ -48,12 +48,16 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Container(
             alignment: Alignment.center,
-            color: const Color.fromARGB(255, 254, 252, 253),
+            color: Colors.white,
             child: Container(
               padding: const EdgeInsets.only(top: 38.0, left: 18.0, right: 18.0, bottom: 28.0),
               foregroundDecoration: BoxDecoration(
                 border: Border.all(color: const Color.fromARGB(255, 245, 219, 229), width: 2),
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
+              ),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 254, 252, 253),
+                borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
