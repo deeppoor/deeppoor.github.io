@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:lottie_player/lottie_player.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,12 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 135,
                     height: 135,
                     child: kIsWeb
-                        ? const LottiePlayer(
-                            networkUrl: "https://lottie.host/4bc80984-a85e-4d03-975e-7bbd6d232c38/ZOWuNm6dpJ.json",
+                        ? SvgPicture.asset(
+                            "assets/icons/gril.svg",
+                            semanticsLabel: 'Gril',
                             width: 135,
                             height: 135,
                           )
-                        : Lottie.asset('lottie/girl.json'),
+                        : Lottie.asset('assets/lottie/girl.json'),
                   ),
                   const SizedBox(
                     height: 16.0,
@@ -83,12 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(
                     height: 18,
                     child: kIsWeb
-                        ? const LottiePlayer(
-                            networkUrl: "https://lottie.host/c5f40fac-996b-49f7-b5de-fee06457c16e/bNVyijgE6F.json",
-                            height: 16,
-                            width: 150,
-                          )
-                        : Lottie.asset("lottie/bee.json"),
+                        ? Container()
+                        : Lottie.asset("assets/lottie/bee.json"),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: .0, left: 18.0, right: 18.0),
