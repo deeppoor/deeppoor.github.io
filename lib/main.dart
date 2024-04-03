@@ -79,12 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   const SizedBox(
                     height: 16.0,
+                    width: 0.0,
                   ),
                   SizedBox(
                     height: 18,
-                    child: kIsWeb
-                        ? Container()
-                        : Lottie.asset("assets/lottie/bee.json"),
+                    width: 135,
+                    child: kIsWeb ? Container() : Lottie.asset("assets/lottie/bee.json"),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: .0, left: 18.0, right: 18.0),
@@ -108,10 +108,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Positioned(
             bottom: _snackBarVisible ? 52.0 : 0.0,
-            left: 0,
-            right: 0,
+            left: 10,
+            right: 10,
             child: InkWell(
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              child: Wrap(alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
                 Tooltip(
                   message: "如果你为富裕而烦恼，为什么不捐赠给我呢？下面是我的卡号",
                   child: footText("If you are troubled by being too rich, why not donate to me? My bank card: "),
