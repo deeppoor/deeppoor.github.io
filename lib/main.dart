@@ -105,45 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-          ),
-          Positioned(
-            bottom: _snackBarVisible ? 52.0 : 0.0,
-            left: 10,
-            right: 10,
-            child: InkWell(
-              child: Wrap(alignment: WrapAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                Tooltip(
-                  message: "如果你为富裕而烦恼，为什么不捐赠给我呢？下面是我的卡号",
-                  child: footText("If you are troubled by being too rich, why not donate to me? My bank card: "),
-                ),
-                SvgPicture.asset(
-                  "assets/icons/unionpay.svg",
-                  // colorFilter: const ColorFilter.mode(Color.fromARGB(255, 255, 185, 205), BlendMode.srcIn),
-                  semanticsLabel: 'UnionPay',
-                  width: 12,
-                  height: 12,
-                ),
-                footText(" 6214"),
-                footText(" 8358"),
-                footText(" 9272"),
-                footText(" 5795"),
-              ]),
-              onTap: () {
-                copyBankCardNumber(context, _handleTap);
-              },
-              onDoubleTap: () {
-                copyBankCardNumber(context, _handleTap);
-              },
-              onSecondaryTap: () {
-                copyBankCardNumber(context, _handleTap);
-              },
-              onLongPress: () {
-                copyBankCardNumber(context, _handleTap);
-              },
-            ),
           )
         ],
       ),
